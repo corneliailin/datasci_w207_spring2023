@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>DataSci W207: Applied Machine Learning (Fall 2022)</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #000000; color: rgba(0, 0, 0, 0.85); -webkit-text-stroke: rgba(0, 0, 0, 0.85)}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #0000e9; -webkit-text-stroke: #0000e9}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p7 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p8 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 6.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px Times; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px Times; color: #ffffff; -webkit-text-stroke: #ffffff; min-height: 14.0px}
+    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #0000e9; -webkit-text-stroke: #0000e9}
+    li.li3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    li.li7 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    li.li15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none; background-color: #b3b3b3}
+    span.s2 {font: 12.0px Times; text-decoration: underline ; font-kerning: none; color: #0000e9; -webkit-text-stroke: 0px #0000e9}
+    span.s3 {font: 12.0px Times; font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s4 {-webkit-text-stroke: 0px #000000}
+    span.s5 {text-decoration: underline ; font-kerning: none}
+    span.s6 {font-kerning: none}
+    span.s7 {color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s8 {font-kerning: none; color: #000000; -webkit-text-stroke: 0px #000000}
+    span.s9 {text-decoration: underline ; font-kerning: none; color: #0000e9; -webkit-text-stroke: 0px #0000e9}
+    span.s10 {color: #0000e9; -webkit-text-stroke: 0px #000000}
+    span.s11 {text-decoration: underline ; font-kerning: none; -webkit-text-stroke: 0px #0000e9}
+    td.td1 {width: 49.5px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td2 {width: 167.6px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td3 {width: 56.6px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td4 {width: 225.2px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td5 {width: 151.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td6 {width: 738.0px; background-color: #000000; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #ffffff #ffffff #343434 #ffffff; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td7 {width: 49.5px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td8 {width: 167.6px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td9 {width: 54.6px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 1.0px 1.0px 1.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td10 {width: 223.2px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 1.0px 1.0px 1.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td11 {width: 151.0px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td12 {margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td13 {width: 42.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td14 {width: 122.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td15 {width: 186.0px; background-color: #000000; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #ffffff #ffffff #343434 #ffffff; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td16 {width: 42.0px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td17 {width: 122.0px; margin: 0.5px 0.5px 0.5px 0.5px; border-style: solid; border-width: 0.0px 0.0px 1.0px 0.0px; border-color: #000000 #000000 #343434 #000000; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td18 {width: 62.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    td.td19 {width: 22.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 5.0px 10.0px 5.0px 10.0px}
+    ul.ul1 {list-style-type: disc}
+    ul.ul2 {list-style-type: circle}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">Toggle navigation </span><span class="s2">W207</span><span class="s3"><span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li2"><span class="s4"></span><span class="s5">About</span></li>
+  <ul class="ul2">
+    <li class="li2"><span class="s4"></span><span class="s5">Description</span></li>
+    <li class="li2"><span class="s4"></span><span class="s5">Announcements</span></li>
+    <li class="li2"><span class="s4"></span><span class="s5">Class Logistics</span></li>
+    <li class="li2"><span class="s4"></span><span class="s5">Live Session Plan</span></li>
+    <li class="li3"></li>
+    <li class="li2"><span class="s4"></span><span class="s5">Grading</span></li>
+    <li class="li3"></li>
+  </ul>
+  <li class="li2"><span class="s4"></span><span class="s5">Assignments and Final Project Submission Guidelines</span></li>
+  <li class="li2"><span class="s4"><a href="https://learn.datascience.berkeley.edu/"><span class="s5">ISVC</span></a></span></li>
+</ul>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s6"><b>DataSci W207: <br>
+Applied Machine Learning</b></span></h1>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s6"><b>Lecture: Mo, Tu, Th<span class="Apple-converted-space"> </span></b></span></h3>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s6"><b>Office hours: Tu, 8-9 am PT</b></span></h3>
+<p class="p6"><span class="s6">Description</span></p>
+<p class="p7"><span class="s6">This course provides a practical introduction to the rapidly growing field of machine learningâ€” training predictive models to generalize to new data. We start with linear and logistic regression and implement gradient descent for these algorithms, the core engine for training. With these key building blocks, we work our way to understanding widely used neural network architectures, focusing on intuition and implementation with TensorFlow/Keras. While the course centers on neural networks, we will make sure to cover key ideas in unsupervised learning and nonparametric modeling.</span></p>
+<p class="p7"><span class="s6">Along the way, <b>weekly short coding assignments</b> will connect lectures with concrete data and real applications. A more <b>open-ended final project</b> will tie together crucial concepts in experimental design and analysis with models and training.</span></p>
+<p class="p7"><span class="s6">This class meets for one 90 min class periods each week.</span></p>
+<p class="p7"><span class="s6">All materials for this course are posted on GitHub in the form of Jupyter notebooks.</span></p>
+<p class="p6"><span class="s6">Announcements</span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s4"></span><span class="s6">Please fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJ0CPATHn3SzRAVCGFfy3S1-5EeDJwxEBa8D67egYMsdbnvA/viewform"><span class="s2">PRE-COURSE survey</span></a> so I can get to know a bit more about you and your programming background.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">Due to a large number of private Slack inquiries, I encourage you to first read this website for commonly asked questions.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">Any questions regarding course content and organization (including assignments and final project) should be posted on my Slack channel. You are strongly encouraged to answer other students' questions when you know the answer.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">If there are private matters specific to you (e.g., special accommodations), please contact me directly.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">If you miss a class, watch the recording and inform me <a href="https://forms.gle/Q3udU8JMUDPZ9r5aA"><span class="s2">here</span></a>.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">If you want to stay up to date with recent work in AI/ML, start by looking at the conferences <a href="https://nips.cc/"><span class="s2">NeurIPS</span></a> and <a href="https://icml.cc/"><span class="s2">ICML</span></a>.</span></li>
+  <li class="li2"><span class="s7"></span><span class="s8">ML study guidelines: <a href="https://github.com/afshinea/stanford-cs-229-machine-learning/blob/master/en/super-cheatsheet-machine-learning.pdf"><span class="s9">Stanford's super cheatsheet</span></a>.</span></li>
+</ul>
+<p class="p6"><span class="s6">Class Logistics</span></p>
+<p class="p7"><span class="s6"><b>Course Prerequisites</b><span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li7"><span class="s4"></span><span class="s6">Core data science courses: research design, storing and retrieving data, exploring and analyzing data.<br>
+</span></li>
+  <li class="li7"><span class="s4"></span><span class="s6">Undergraduate-level probability and statistics. Linear algebra is recommended.<br>
+</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><b>Programming Prerequisites</b><span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li7"><span class="s4"></span><span class="s6">Python (v3).<br>
+</span></li>
+  <li class="li7"><span class="s4"></span><span class="s6">Jupiter and JupiterLab notebooks. You can install them in your computer using <a href="https://pypi.org/project/pip/"><span class="s2">pip</span></a> or <a href="https://www.anaconda.com/"><span class="s2">Anaconda</span></a>. More information <a href="https://jupyter.org/install"><span class="s2">here</span></a>.<br>
+</span></li>
+  <li class="li7"><span class="s4"></span><span class="s6">Git(Hub), including clone/commmit/push from the command line. You can sign up for an account <a href="https://github.com/join"><span class="s2">here.</span></a><br>
+</span></li>
+  <li class="li7"><span class="s4"></span><span class="s6">If you have a MacOS M1, this <a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/macOS_M1_install/Prerequisite-install.sh"><span class="s2">.sh script</span></a> will install everything for you (credit goes to one of my former students, Michael Tay)<br>
+</span></li>
+</ul>
+<p class="p7"><span class="s6"><b>OS</b><span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li7"><span class="s4"></span><span class="s6">Mac/Windows/Linux are all acceptable to use.<br>
+</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><b>Textbook</b><span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s10"><a href="https://search.library.berkeley.edu/discovery/fulldisplay?docid=alma9914824770906531&amp;context=L&amp;vid=01UCS_BER:UCB&amp;lang=en&amp;search_scope=DN_and_CI&amp;adaptor=Local%20Search%20Engine&amp;tab=Default_UCLibrarySearch&amp;query=any,contains,Python%20Machine%20Learning:%20Machine%20Learning%20and%20Deep%20Learning%20with%20Python&amp;offset=0"><span class="s11">Raschka &amp; Mirjalili (RM)</span></a></span><span class="s6">, Python machine learning: Machine learning and deep learning with Python, scikit-learn, and TensorFlow 2.</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><b>Assignments</b><span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s4"></span><span class="s6">Weekly coding assignments, submitted via GitHub and Digital Campus (see notes below).</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><b>Final Project</b><span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s4"></span><span class="s6">You will present your final project in class during the final session. You are allowed to work in teams.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">You will submmit your code and presentation slides via GitHub and Digital Campus (see notes below).</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s6"><b>Live Session Plan</b></span></h2>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p10"><span class="s6"></span><br></p>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p11"><span class="s6"><b>Week</b></span></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p11"><span class="s6"><b>Lecture</b></span></p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p11"><span class="s6"><b>Lecture Materials</b></span></p>
+      </td>
+      <td valign="middle" class="td4">
+        <p class="p11"><span class="s6"><b>Readings</b></span></p>
+      </td>
+      <td valign="middle" class="td5">
+        <p class="p11"><span class="s6"><b>Deadlines (Sunday of the week, 11:00 pm PT)</b></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5" valign="middle" class="td6">
+        <p class="p12"><span class="s6">Supervised and Unsupervised Learning</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Jan 09-15</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Introduction and Framing</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week01">Week 01</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td12">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Jan 16-22</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Linear Regression - part 1</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week02">Week 02</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p6"><span class="s6">RM (10, 13 - intro to TensorFlow only), <a href="https://sebastianraschka.com/Articles/2014_about_feature_scaling.html"><span class="s2">feature scaling</span></a>, <a href="https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"><span class="s2">more math (1)</span></a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/01%20Introduction.ipynb">Assignment 1</a></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Jan 23-29</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Linear Regression - part 2</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week03">Week 03</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p2"><span class="s8">RM (4, 2), <a href="https://www.nature.com/articles/s41598-021-92892-8.epdf?sharing_token=XmClBG-Ang4L6rSHBdcZTNRgN0jAjWel9jnR3ZoTv0P5L7M0o_Ue2T7O6vYasC-Z-6fBkDi2rLMQFNHaxN662UHvSQ3n65X-ShzzRWOSmMjsmQYVFduLkI9F_jYWfMfSCKWSFQvjbXpePl-uDGyBk-jocsQ0dFCvpVhDvU1R__A%3D"><span class="s9">Ilin et al. (2021)</span></a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/02%20Linear%20Regression.ipynb">Assignment 2</a></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Jan 30-Feb 05</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Logistic Regression - part 1</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week04">Week 04</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p6"><span class="s6">RM (3, 6 (p.211-219)), <a href="https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"><span class="s2">more math (2)</span></a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/03%20Linear%20Regression%20with%20Tensorflow.ipynb">Assignment 3</a></span></p>
+        <p class="p6"><span class="s6">Group, question, and dataset for final project</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Feb 06-12</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Logistic Regression - part 2</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week05">Week 05</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p6"><span class="s6">RM (3, 6 (p.211-219)), <a href="https://sebastianraschka.com/faq/docs/softmax_regression.html"><span class="s2">more intuition</span></a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/04%20Logistic%20Regression%20with%20Tensorflow.ipynb">Assignment 4</a></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Feb 13-19</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Feedforward Neural Networks</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week06">Week 06</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p2"><span class="s8">RM (12, 13, 14), <a href="https://www.v7labs.com/blog/neural-networks-activation-functions"><span class="s9">activation functions</span></a>, <a href="https://sebastianraschka.com/pdf/lecture-notes/stat453ss21/L10_regularization__slides.pdf"><span class="s9">regularization</span></a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/05%20Multiclass%20Classification.ipynb">Assignment 5</a></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Feb 20-26</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">KNN, Decision Trees, and Ensembles</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week07">Week 07</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p2"><span class="s8">RM (3, 7), <a href="https://www.mdpi.com/1424-8220/22/17/6600/htm"><span class="s9">Psaltos et al (2022)</span></a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/06%20Neural%20Networks.ipynb">Assignment 6</a></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">Feb 27-March 05</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">K-Means and PCA<span class="Apple-converted-space"> </span></span></p>
+        <p class="p6"><span class="s6"><b>Project: baseline presentation</b></span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week08">Week 08</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p6"><span class="s6">RM (11)</span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p6"><span class="s6">Assignment 7<span class="Apple-converted-space"> </span></span></p>
+        <p class="p6"><span class="s6">Baseline presentation: slides</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">March 06-12</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Sequence modelling and embeddings</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week09">Week 09</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p6"><span class="s6">RM (8, 16)</span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/08%20Kmeans%20Clustering.ipynb">Assignment 8</a></span><span class="s8"><span class="Apple-converted-space"> </span></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">March 13-19</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Convolutional Neural Networks</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week10">Week 10</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p2"><span class="s8">RM (15), <a href="https://cezannec.github.io/CNN_Text_Classification/"><span class="s9">1D CNN intuition</span></a>, <a href="https://arxiv.org/abs/1408.5882"><span class="s9">Yoon Kim (2014)</span></a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/09%20Embeddings%20for%20Text.ipynb">Assignment 9</a></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">March 20-26</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Network Architecture and Debugging ML algorithms<span class="Apple-converted-space"> </span></span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week11">Week 11</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p2"><span class="s5"><a href="https://cs229.stanford.edu/materials/ML-advice.pdf">Andrew Ng's advice for Applying ML</a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/blob/main/Homework/10%20CNN.ipynb">Assignment 10</a></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">March 27-April 02</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Spring Break</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">April 03-09</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Fairness in ML</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week12">Week 12</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p2"><span class="s5"><a href="https://dl.acm.org/doi/pdf/10.1145/3465416.3483305">Suresh and Guttag (2021)</a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">April 10-16</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6">Advanced Topics: RNN, Transformers, BERT</span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p2"><span class="s5"><a href="https://github.com/MIDS-W207/cilin-coursework-fall2022/tree/main/Live_Sessions/week13">Week 13</a></span></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p2"><span class="s5"><a href="https://berkeley.primo.exlibrisgroup.com/permalink/01UCS_BER/1thfj9n/alma9917493264406531">Rashka et al, ch. 16 (2022)</a></span></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td7">
+        <p class="p6"><span class="s6">April 17-23</span></p>
+      </td>
+      <td valign="middle" class="td8">
+        <p class="p6"><span class="s6"><b>Project: final presentation<span class="Apple-converted-space"> </span></b></span></p>
+      </td>
+      <td valign="middle" class="td9">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td10">
+        <p class="p13"><span class="s6"></span><br></p>
+      </td>
+      <td valign="middle" class="td11">
+        <p class="p6"><span class="s6">Final presentation: slides and code<span class="Apple-converted-space"> </span></span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p8"><span class="s6"></span><br></p>
+<h2 style="margin: 0.0px 0.0px 14.9px 0.0px; font: 18.0px Times; color: #000000; -webkit-text-stroke: #000000"><span class="s6"><b>Communication channel</b></span></h2>
+<p class="p7"><span class="s6">We will use Slack to communicate throughout the semester. Questions/comments related to your projects (NO CODE) are strongly encouraged.<span class="Apple-converted-space"> </span></span></p>
+<p class="p10"><span class="s6"></span><br></p>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td13">
+        <p class="p11"><span class="s6"><b>Sections</b></span></p>
+      </td>
+      <td valign="middle" class="td14">
+        <p class="p11"><span class="s6"><b>Slack channel</b></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="middle" class="td15">
+        <p class="p14"><span class="s6"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td16">
+        <p class="p6"><span class="s6">1, 5, 8</span></p>
+      </td>
+      <td valign="middle" class="td17">
+        <p class="p6"><span class="s6">#datasci-207-2023-spring-ci</span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p6"><span class="s6">Final Project</span></p>
+<p class="p7"><span class="s6">For the final project you will form a group (3-4 people are ideal; 2-5 people are allowed; no 1 person group allowed). Grades will be calibrated by group size. Your group can only include members from the section in which you are enrolled.<span class="Apple-converted-space"> </span></span></p>
+<p class="p7"><span class="s6">Do not just re-run an existing code repository; at the minimum, you must demonstrate the ability to perform thoughtful data preprocessing and analysis (e.g., data cleaning, model training, hyperparameter selection, model evaluation).</span></p>
+<p class="p7"><span class="s6">The topic of your project is totally flexible (see also below some project ideas).</span></p>
+<p class="p7"><span class="s6"><b>Deadlines to remember</b>:<span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s4"></span><span class="s6">week 04: inform me <a href="https://docs.google.com/spreadsheets/d/1WE8Fwp-V4S2RQIxz9w64LShvvf12O6_mpJDD0MqSF5w/edit?usp=sharing"><span class="s2">here</span></a> about your group, question and dataset you plan to use.<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">week 08: prepare the baseline presentation of your project. You will present in class (no more than 10 min).<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">week 16: prepare the final presentation of your project. You will present in class (no more than 20 min).</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><b>A few project ideas (from my Summer &amp; Fall 2022 students)</b>:<span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Julia_Bobrovskiy_Julia,%20Nic,%20Greg,%20Denny,%20Jacob%20_%20Solar%20Data%20_%20W207%20Summer2022.pdf"><span class="s5">Can we predict solar panel electricity production using equipment and weather data?</span></a></span></li>
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Final%20-%20Pedro%20Chun%20Evan%20Dmitri%20W207%20Summer2022%20%7C%20Monday,%204pm%20PT.pdf"><span class="s5">Predict Stock Portfolio Returns using News Headlines</span></a></span></li>
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Naveen_Purushotham_Slides_Pneumonia_Detection_VI_KN_NP.pdf"><span class="s5">Pneumonia Detection from Chest Xrays</span></a></span></li>
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Sam_Rosenberg_W207_Pred_EUI_Final%20Presentation.pdf"><span class="s5">Predicting Energy Usage from Publically Available Building Performance Data</span></a></span></li>
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Ryan_Brown_w207%20Final%20Presentation.pptx"><span class="s5">Can we Predict What Movies will be Well Received?</span></a></span></li>
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Richard_Robbins_w207-music-genre-FINAL-presentation.pptx"><span class="s5">ML for Music Genre Classification<span class="Apple-converted-space"> </span></span></a></span></li>
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Edward_Kirton_Final%20Presentation.pdf"><span class="s5">Predicting Metagenome Sample Source Environment from Protein Annotations</span></a></span></li>
+  <li class="li2"><span class="s4"><a href="file:///Users/cilin/Desktop/datasci_w207_spring2023/summer2022_projects/Prakash_Krishnan_Final_Presentation_CA_Wildfires_Aug_4_2022.pdf"><span class="s5">California Wildfire Prediction</span></a></span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><b>Baseline presentation.</b> Your slides should include:<span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s4"></span><span class="s6">Title, Authors<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">What is the question you will be working on? Why is it interesting?<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">What is the data you will be using? Include data source, size of dataset, main features to be used. Please also include summary statistics of your data.<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">What prediction algorithms do you plan to use? Please describe them in detail.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">How will you evaluate your results? Please describe your chosen performance metrices and/or statistical tests in detail.</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p7"><span class="s6"><b>Final presentation. </b>Your slides should include:<span class="Apple-converted-space"> </span></span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s4"></span><span class="s6">Title, Authors<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"><b></b></span><span class="s6"><b>(15%) Motivation:</b> Introduce your question and why the question is interesting. Explain what has been done before in this space. Describe your overall plan to approach your question. Provide a summary of your results.<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"><b></b></span><span class="s6"><b>(15%) Data:</b> Describe in detail the data that you are using, including the source(s) of the data and relevant statistics.<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"><b></b></span><span class="s6"><b>(15%) Approach:</b> Describe in detail the models (baseline + improvement over baseline) that you use in your approach.<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"><b></b></span><span class="s6"><b>(30%) Experiments:</b> Provide insight into the effect of different hyperperameter choices. Please include tables, figures, graphs to illustrate your experiments.<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"><b></b></span><span class="s6"><b>(10%) Conclusions:</b> Summarize the key results, what has been learned, and avenues for future work.<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"><b></b></span><span class="s6"><b>(15%) Code submission:</b> Provide link to your GitHub repo. The code should be well commented and organized.</span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">Contributions: Specify the contributions of each author (e.g., data processing, algorithm implementation, slides etc).</span></li>
+</ul>
+<p class="p8"><span class="s6"></span><br></p>
+<p class="p6"><span class="s6">Assignments and Final Project Submission Guidelines</span></p>
+<ul class="ul1">
+  <li class="li6"><span class="s4"></span><span class="s6">Step 1: Create GitHub repos for Assignments 1-10 and Final Project<span class="Apple-converted-space"> </span></span></li>
+  <li class="li6"><span class="s4"></span><span class="s6">Step 2: If weekly assignments, upload .ipynb file in Gradescope. If baseline presentation and final project, add link to GitHub repo <a href="https://docs.google.com/spreadsheets/d/1WE8Fwp-V4S2RQIxz9w64LShvvf12O6_mpJDD0MqSF5w/edit?usp=sharing"><span class="s2">here</span></a> and make sure to add me as a contributor (my GitHub username is corneliailin)</span></li>
+  <li class="li15"><br></li>
+  <li class="li6"><span class="s6">Grading</span></li>
+</ul>
+<p class="p7"><span class="s6">Final grades will be determined by computing the weighted average of programming projects, final group project, and participation.</span></p>
+<p class="p7"><span class="s6">Baseline grading range for this course is: A for 93 or above, A- for 90 or above, B+ for 87 or above, B for 83 or above, B- for 80 or above, C+ for 77 or above, C for 73 or above, C- for 70 and above, D+ for 67 and above, D for 63 and above, D- for 60 and above, and F for 59 and below.</span></p>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td18">
+        <p class="p6"><span class="s6">Participation</span></p>
+      </td>
+      <td valign="middle" class="td19">
+        <p class="p6"><span class="s6">5%</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td18">
+        <p class="p6"><span class="s6">Assignments</span></p>
+      </td>
+      <td valign="middle" class="td19">
+        <p class="p6"><span class="s6">65%</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td18">
+        <p class="p6"><span class="s6">Final project</span></p>
+      </td>
+      <td valign="middle" class="td19">
+        <p class="p6"><span class="s6">30%</span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p6"><span class="s6">Late Policy</span></p>
+<p class="p6"><span class="s6">Weekly homework assignments can be submitted up to 3 days late with a 10% (absolute) penalty per day. The lowest grade will be dropped.<span class="Apple-converted-space"> </span></span></p>
+<p class="p6"><span class="s6">Equity and Inclusion</span></p>
+<p class="p7"><span class="s6">Integrating a diverse set of experiences is important for a more comprehensive understanding of machine learning. I will make an effort to read papers and hear from a diverse group of practitioners, still, limits exist on this diversity in the field of machine learning. I acknowledge that it is possible that there may be both overt and covert biases in the material due to the lens with which it was created. I would like to nurture a learning environment that supports a diversity of thoughts, perspectives and experiences, and honors your identities (including race, gender, class, sexuality, religion, ability, veteran status, etc.) in the spirit of the <a href="https://diversity.berkeley.edu/principles-community"><span class="s2">UC Berkeley Principles of Community.</span></a></span></p>
+<p class="p7"><span class="s6">To help accomplish this, please contact me or submit anonymous feedback through I School channels if you have any suggestions to improve the quality of the course. If you have a name and/or set of pronouns that you prefer I use, please let me know. If something was said in class (by anyone) or you experience anything that makes you feel uncomfortable, please talk to me about it. If you feel like your performance in the class is being impacted by experiences outside of class, please donâ€™t hesitate to come and talk with me. I want to be a resource for you. Also, anonymous feedback is always an option, and may lead to me to make a general announcement to the class, if necessary, to address your concerns.</span></p>
+<p class="p7"><span class="s6">As a participant in teamwork and course discussions, you should also strive to honor the diversity of your classmates.</span></p>
+<p class="p7"><span class="s6">If you prefer to speak with someone outside of the course, MICS Academic Director Lisa Ho, I School Assistant Dean of Academic Programs Catherine Cronquist Browning, and the UC Berkeley Office for Graduate Diversity are excellent resources. Also see the following <a href="https://www.ischool.berkeley.edu/about/community"><span class="s2">link.</span></a></span></p>
+</body>
+</html>
